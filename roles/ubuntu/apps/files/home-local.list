@@ -1,0 +1,13 @@
+# archive
+deb http://repo.home.local/artifactory/ubuntu/ focal main restricted
+deb http://repo.home.local/artifactory/ubuntu/ focal-updates main restricted
+deb http://repo.home.local/artifactory/ubuntu/ focal universe
+deb http://repo.home.local/artifactory/ubuntu/ focal-updates universe
+deb http://repo.home.local/artifactory/ubuntu/ focal multiverse
+deb http://repo.home.local/artifactory/ubuntu/ focal-updates multiverse
+deb http://repo.home.local/artifactory/ubuntu/ focal-backports main restricted universe multiverse
+
+# security
+# deb http://repo.home.local/artifactory/ubuntu/ focal-security main restricted
+# deb http://repo.home.local/artifactory/ubuntu/ focal-security universe
+# deb http://repo.home.local/artifactory/ubuntu/ focal-security multiverse

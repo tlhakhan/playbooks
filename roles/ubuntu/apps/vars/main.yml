@@ -1,0 +1,18 @@
+fun_packages:
+  - tree
+  - figlet
+  - mosh
+  - tmux
+  - jq
+  - vim
+
+essential_packages:
+  - sysstat
+  - iftop
+  - rsync
+  - git
+  - ebtables
+  - zfsutils-linux
+  - nvme-cli
+  - gpg
+  - unzip

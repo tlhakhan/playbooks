@@ -1,0 +1,45 @@
+---
+#
+# Install docker.io and docker-compose
+#
+- name: Install docker.io and docker-compose
+  package:
+    name: '{{ item }}'
+    state: latest
+  loop:
+    - docker.io
+    - docker-compose
+    
+#
+# send over daemon.json
+# 
+- name: Make /etc/docker folder
+  file:
+    path: /etc/docker
+    state: directory
+
+- name: Send over daemon.json
+  copy:
+    src: daemon.json
+    dest: /etc/docker/daemon.json
+  notify: restart docker
+
+#
+# Docker repo certs
+#
+- name: Make docker certs folder
+  file:
+    path: /etc/docker/certs.d
+    state: directory
+
+- name: Make repo.home.local folder
+  file:
+    path: /etc/docker/certs.d/repo.home.local
+    state: directory
+
+- name: Send home CA cert
+  copy:
+    content: '{{ home_ca_cert }}'
+    dest: /etc/docker/certs.d/repo.home.local/home-ca.crt
+
+- meta: flush_handlers

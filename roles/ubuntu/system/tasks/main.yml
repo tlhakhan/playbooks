@@ -1,0 +1,31 @@
+---
+
+- name: Generate random password
+  set_fact: 
+    random_password: "{{ lookup('password', '/dev/null')}}"
+  no_log: yes
+
+- name: 'Update password for {{ ansible_ssh_user }}'
+  user:
+    name: '{{ ansible_ssh_user }}'
+    password: "{{ random_password | password_hash('sha512') }}"
+
+- name: Update authorized_keys file of root user
+  authorized_key:
+    user: root
+    state: present
+    key: '{{ item }}'
+  loop: '{{ authorized_keys }}'
+
+- name: 'Update authorized_keys file of {{ ansible_ssh_user }} user'
+  authorized_key:
+    user: '{{ ansible_ssh_user }}'
+    state: present
+    key: '{{ item }}'
+  loop: '{{ authorized_keys }}'
+
+- name: Update local ca certs
+  copy:
+    dest: /usr/local/share/ca-certificates/home-local.crt
+    content: '{{ home_ca_cert }}'
+  notify: update ca certificates

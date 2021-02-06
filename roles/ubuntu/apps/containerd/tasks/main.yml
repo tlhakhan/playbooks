@@ -1,0 +1,29 @@
+---
+- name: Send over containerd modules-load config
+  copy:
+    src: containerd.conf
+    dest: /etc/modules-load.d/
+
+- name: Send over containter runtime interface sysctl params
+  copy:
+    src: 99-kubernetes-cri.conf
+    dest: /etc/sysctl.d/
+  notify: apply sysctl params
+
+- name: Install contianerd
+  package:
+    name: containerd  
+    state: present
+
+- name: Make containerd config folder
+  file:
+    path: /etc/containerd
+    state: directory
+
+- name: Send over containerd config.toml file
+  copy:
+    src: config.toml
+    dest: /etc/containerd/
+  notify: restart containerd
+
+- meta: flush_handlers

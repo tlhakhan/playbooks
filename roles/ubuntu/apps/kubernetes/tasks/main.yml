@@ -1,0 +1,25 @@
+---
+
+- name: Install kubectl
+  package:
+    name: kubectl
+    state: present
+  when: install_kubectl
+
+- name: Setup kubectl bash completion
+  shell: kubectl completion bash > /etc/bash_completion.d/kubectl
+  changed_when: false
+  when: install_kubectl
+
+- name: Install kubeadm
+  package:
+    name: kubeadm
+    state: present
+  when: install_kubeadm
+
+- name: Install kubelet
+  package:
+    name: kubelet
+    state: present
+  when: install_kubelet
+

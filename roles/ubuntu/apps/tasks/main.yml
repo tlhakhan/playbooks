@@ -1,0 +1,30 @@
+---
+#
+# apt-sources
+#
+- name: Send over sources list
+  copy:
+    src: '{{ item }}'
+    dest: /etc/apt/sources.list.d/
+  with_fileglob:
+    - '*.list'
+
+- name: Add kubernetes gpg key
+  shell: curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+  changed_when: false
+
+- name: Add tailscale focal gpg key
+  shell: curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.gpg | sudo apt-key add -
+  changed_when: false
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+#
+# packages
+#
+- name: Install packages
+  package:
+    name: '{{ item }}'
+  loop: '{{ fun_packages + essential_packages }}'
