@@ -1,0 +1,72 @@
+---
+- name: Assert required variables
+  assert:
+    that:
+      - 'vswitch_portgroups is defined'
+
+- name: Update the authorized_keys
+  lineinfile:
+    path: /etc/ssh/keys-root/authorized_keys
+    line: '{{ item }}'
+    state: present
+  loop: '{{ authorized_keys }}'
+
+- name: Enable remote access
+  command: '{{ item }}'
+  with_items:
+    - vim-cmd hostsvc/enable_ssh
+    - vim-cmd hostsvc/enable_esx_shell
+
+- name: Start remote access
+  command: '{{ item }}'
+  with_items:
+    - vim-cmd hostsvc/start_ssh
+    - vim-cmd hostsvc/start_esx_shell
+
+- name: Generate random password
+  set_fact:
+    random_password: "{{ lookup('password', '/dev/null')}}"
+  no_log: yes
+
+- name: 'Update password for {{ ansible_user_id }}'
+  command: "esxcli system account --id={{ ansible_user_id }} --password={{ random_password }} --password-confirmation={{ random_password }}"
+
+- name: Suppress shell warnings
+  command: esxcli system settings advanced set -o /UserVars/SuppressShellWarning -i 1
+
+- name: Enable guest ip hack
+  command: esxcli system settings advanced set -o /Net/GuestIPHack -i 1
+
+- name: Disable firewall
+  command: esxcli network firewall set --enabled=false
+  ignore_errors: yes
+
+- name: Get user list
+  command: esxcli system account list
+  register: output
+
+- name: Set ESX build user
+  set_fact:
+    esx_build_username: "{{ lookup('env', 'ESX_BUILD_USERNAME')}}"
+    esx_build_password: "{{ lookup('env', 'ESX_BUILD_PASSWORD')}}"
+  no_log: yes
+
+- name: 'Create {{ esx_build_username }} user'
+  command: "esxcli system account add --id={{ esx_build_username }} --password={{ esx_build_password }} --password-confirmation={{ esx_build_password }}"
+  when: not (output.stdout | regex_search(esx_build_username + ' ESXi User' | string))
+  no_log: yes
+
+- name: Update builder user to be Admin
+  command: esxcli system permission set -i builder -r Admin
+
+- name: Create portgroups
+  command: 'esxcli network vswitch standard portgroup add --portgroup-name="{{ item.name }}" --vswitch-name=vSwitch0'
+  loop: '{{ vswitch_portgroups }}'
+  register: output
+  failed_when:
+    - output.rc == 1
+    - "'already exists' not in output.stdout"
+
+- name: Set vlan-id for porgroups
+  command: 'esxcli network vswitch standard portgroup set --portgroup-name="{{ item.name }}" --vlan-id={{ item.vlan_id }}'
+  loop: '{{ vswitch_portgroups }}'
