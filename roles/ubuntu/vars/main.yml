@@ -1,0 +1,23 @@
+packages:
+  - sysstat
+  - rsync
+  - git
+  - ebtables
+  - zfsutils-linux
+  - nvme-cli
+  - gpg
+  - unzip
+  - tree
+  - figlet
+  - mosh
+  - tmux
+  - jq
+  - zip
+  - unzip
+  - vim
+  - hwloc-nox
+  - smartmontools
+  - apt-utils
+  - apt-file
+  - golang-go
+  - golang-doc

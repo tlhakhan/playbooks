@@ -1,6 +1,6 @@
 ---
 #
-# apt-sources
+# A set of tasks that will install apt sources and install a set of packages.
 #
 - name: Send over sources list
   copy:
@@ -21,10 +21,17 @@
   apt:
     update_cache: yes
 
-#
-# packages
-#
 - name: Install packages
   package:
     name: '{{ item }}'
-  loop: '{{ fun_packages + essential_packages }}'
+    state: present
+  loop: '{{ packages }}'
+
+- name: Get rustup-inith script
+  get_url:
+    url: https://sh.rustup.rs
+    dest: /root/rustup-init.sh
+    mode: 0755
+
+- name: Run rustup-init.sh
+  shell: /root/rustup-init.sh -y -q 

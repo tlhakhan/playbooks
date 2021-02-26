@@ -5,10 +5,15 @@
 - name: Install docker.io and docker-compose
   package:
     name: '{{ item }}'
-    state: latest
+    state: present
   loop:
     - docker.io
     - docker-compose
+
+- name: Make /data folder
+  file:
+    path: /data
+    state: directory
     
 #
 # send over daemon.json

@@ -1,0 +1,6 @@
+---
+- name: Update local ca certs
+  copy:
+    dest: /usr/local/share/ca-certificates/home-local.crt
+    content: '{{ home_ca_cert }}'
+  notify: update ca certificates
