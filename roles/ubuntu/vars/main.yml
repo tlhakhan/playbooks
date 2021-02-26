@@ -21,3 +21,4 @@ packages:
   - apt-file
   - golang-go
   - golang-doc
+  - zsh
