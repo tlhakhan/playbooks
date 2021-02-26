@@ -1,3 +1,4 @@
+#!/usr/bin/ansible-playbook
 ---
 - name: Configure ubuntu machine
   hosts: my_ubuntu
