@@ -6,8 +6,9 @@
   copy:
     src: '{{ item }}'
     dest: /etc/apt/sources.list.d/
-  with_fileglob:
-    - '*.list'
+  loop:
+    - kubernetes.list
+    - tailscale.list
 
 - name: Add kubernetes gpg key
   shell: curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
@@ -26,12 +27,3 @@
     name: '{{ item }}'
     state: present
   loop: '{{ packages }}'
-
-- name: Get rustup-inith script
-  get_url:
-    url: https://sh.rustup.rs
-    dest: /root/rustup-init.sh
-    mode: 0755
-
-- name: Run rustup-init.sh
-  shell: /root/rustup-init.sh -y -q 

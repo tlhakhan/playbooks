@@ -1,24 +1,22 @@
 packages:
-  - sysstat
-  - rsync
-  - git
-  - ebtables
-  - zfsutils-linux
-  - nvme-cli
-  - gpg
-  - unzip
-  - tree
-  - figlet
-  - mosh
-  - tmux
-  - jq
-  - zip
-  - unzip
-  - vim
-  - hwloc-nox
-  - smartmontools
-  - apt-utils
-  - apt-file
-  - golang-go
-  - golang-doc
-  - zsh
+  - ansible # config automation
+  - sysstat # system stats
+  - rsync # transfer files
+  - git # source code manager
+  - ebtables # networking, ethernet briding tables
+  - zfsutils-linux # zfs for linux
+  - nvme-cli # nvme tools
+  - gpg # gnu privacy guard
+  - tree # directory ascii layout
+  - figlet # ascii art fonts
+  - mosh # always on shell
+  - tmux # terminal multiplexer
+  - jq # json pretty format
+  - zip # zip files
+  - unzip # unzip zip files
+  - vim # editor
+  - hwloc-nox # view hardware topology, no X
+  - smartmontools # access disk reliability stats
+  - apt-utils # for apt management
+  - apt-file # search for files in packages
+  - zsh # zshell
