@@ -8,3 +8,5 @@
     - ubuntu
     - docker
     - jfrog-cli
+    - golang
+    - rustc
