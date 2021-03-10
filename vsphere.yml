@@ -1,3 +1,4 @@
+#!/usr/bin/ansible-playbook
 ---
 - name: Configure vsphere machine
   hosts: my_vsphere

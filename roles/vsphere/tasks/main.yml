@@ -33,31 +33,11 @@
 
 - name: Suppress shell warnings
   command: esxcli system settings advanced set -o /UserVars/SuppressShellWarning -i 1
+  changed_when: false
 
 - name: Enable guest ip hack
   command: esxcli system settings advanced set -o /Net/GuestIPHack -i 1
-
-- name: Disable firewall
-  command: esxcli network firewall set --enabled=false
-  ignore_errors: yes
-
-- name: Get user list
-  command: esxcli system account list
-  register: output
-
-- name: Set ESX build user
-  set_fact:
-    esx_build_username: "{{ lookup('env', 'ESX_BUILD_USERNAME')}}"
-    esx_build_password: "{{ lookup('env', 'ESX_BUILD_PASSWORD')}}"
-  no_log: yes
-
-- name: 'Create {{ esx_build_username }} user'
-  command: "esxcli system account add --id={{ esx_build_username }} --password={{ esx_build_password }} --password-confirmation={{ esx_build_password }}"
-  when: not (output.stdout | regex_search(esx_build_username + ' ESXi User' | string))
-  no_log: yes
-
-- name: Update builder user to be Admin
-  command: esxcli system permission set -i builder -r Admin
+  changed_when: false
 
 - name: Create portgroups
   command: 'esxcli network vswitch standard portgroup add --portgroup-name="{{ item.name }}" --vswitch-name=vSwitch0'
