@@ -1,3 +1,2 @@
 # Tailscale packages for ubuntu focal
-# deb https://pkgs.tailscale.com/stable/ubuntu focal main
-deb http://repo.home.local/artifactory/tailscale/ubuntu focal main
+deb https://pkgs.tailscale.com/stable/ubuntu focal main

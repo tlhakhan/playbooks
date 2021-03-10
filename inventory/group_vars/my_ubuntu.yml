@@ -1,1 +1,1 @@
-ansible_ssh_user: sysuser
+ansible_ssh_user: ubuntu
