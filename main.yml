@@ -15,3 +15,7 @@
     - name: Run Ubuntu specific playbooks
       include_tasks: os/ubuntu/main.yml
       when: ansible_facts["distribution"] == "Ubuntu"
+
+    - name: Run CentOS specific playbooks
+      include_tasks: os/centos/main.yml
+      when: ansible_facts["distribution"] == "CentOS"

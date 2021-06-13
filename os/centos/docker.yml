@@ -1,0 +1,78 @@
+---
+#
+# Install docker-ce.repo
+#
+
+- name: Install docker-ce repo
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+
+- name: Add docker gpg key
+  rpm_key:
+    state: present
+    key: https://download.docker.com/linux/centos/gpg
+
+#
+# Install docker
+#
+- name: Install docker
+  package:
+    name: docker-ce
+    state: present
+
+- name: Make /data folder to store docker data
+  file:
+    path: /data
+    state: directory
+    
+#
+# send over daemon.json
+# 
+- name: Make /etc/docker folder
+  file:
+    path: /etc/docker
+    state: directory
+
+- name: Send over daemon.json
+  copy:
+    src: files/docker_daemon.json
+    dest: /etc/docker/daemon.json
+
+#
+# Docker repo certs
+#
+- name: Make docker certs folder
+  file:
+    path: /etc/docker/certs.d
+    state: directory
+
+- name: Make repo.tenzin.io folder
+  file:
+    path: /etc/docker/certs.d/repo.tenzin.io
+    state: directory
+
+- name: Copy home CA cert to docker certs folder
+  copy:
+    src: files/home-ca.crt
+    dest: /etc/docker/certs.d/repo.tenzin.io/home-ca.crt
+
+#
+# Restart docker service
+#
+- name: Retart docker service
+  service:
+    name: docker
+    state: restarted
+  
+#
+# Install docker-compose version
+#
+
+- name: Get docker-compose binary
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    mode: 0755
+
+...

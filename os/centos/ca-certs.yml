@@ -1,0 +1,7 @@
+- name: Add local CA certs
+  copy:
+    src: files/home-ca.crt
+    dest: /etc/pki/ca-trust/source/anchors/
+
+- name: Update CA certs
+  command: update-ca-trust

@@ -1,0 +1,12 @@
+---
+- name: Import ca-certs.yml tasks
+  import_tasks: ca-certs.yml
+  
+- name: Import packages.yml tasks
+  import_tasks: packages.yml
+ 
+- name: Import docker.yml tasks
+  import_tasks: docker.yml
+
+- name: Import tailscale.yml tasks
+  import_tasks: tailscale.yml
