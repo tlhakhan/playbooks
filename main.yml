@@ -2,6 +2,7 @@
 ---
 - name: Configure machine
   hosts: localhost
+  connection: local
   gather_facts: yes
   become: yes
   tasks:
