@@ -1,0 +1,39 @@
+---
+
+- name: Generate random password
+  set_fact: 
+    random_password: "{{ lookup('password', '/dev/null')}}"
+  no_log: yes
+
+- name: Update password for root user
+  user:
+    name: "{{ default_user }}"
+    password: "{{ random_password | password_hash('sha512') }}"
+
+- name: Update password for {{ default_user }} user
+  user:
+    name: root
+    password: "{{ random_password | password_hash('sha512') }}"
+
+- name: Update authorized_keys file of root user
+  authorized_key:
+    user: root
+    state: present
+    key: '{{ item }}'
+  loop: '{{ authorized_keys }}'
+
+- name: Update authorized_keys file of {{ default_user }} user
+  authorized_key:
+    user: "{{ default_user }}"
+    state: present
+    key: '{{ item }}'
+  loop: '{{ authorized_keys }}'
+
+- name: Add local CA certs
+  copy:
+    dest: /usr/local/share/ca-certificates/home-ca.crt
+    content: '{{ home_ca_cert }}'
+
+- name: Update CA certs
+  command: update-ca-certificates
+

@@ -1,0 +1,7 @@
+---
+- name: Import security.yml tasks
+  import_tasks: security.yml
+  
+- name: Import general.yml tasks
+  import_tasks: general.yml
+ 

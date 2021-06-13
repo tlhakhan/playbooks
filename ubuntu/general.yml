@@ -1,0 +1,15 @@
+---
+- name: Send over vimrc
+  copy:
+    src: files/vimrc
+    dest: ~/.vimrc
+
+- name: Send over tmux.conf
+  copy:
+    src: files/tmux.conf
+    dest: ~/.tmux.conf
+
+- name: Send over gitconfig
+  copy:
+    src: files/gitconfig
+    dest: ~/.gitconfig

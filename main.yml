@@ -2,11 +2,12 @@
 ---
 - name: Configure machine
   hosts: localhost
-  become: yes
   gather_facts: yes
-  roles:
-    - general
-    - docker
-    - jfrog-cli
-    - golang
-    - rustc
+  become: yes
+  tasks:
+    - name: Include vars.yml file
+      include_vars: vars.yml
+
+    - name: Run ubuntu.yml playbook
+      include_tasks: ubuntu/main.yml
+      when: ansible_facts["distribution"] == "Ubuntu"
