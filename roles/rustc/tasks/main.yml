@@ -1,9 +1,0 @@
----
-- name: Get rustup-init script
-  get_url:
-    url: https://sh.rustup.rs
-    dest: /root/rustup-init.sh
-    mode: 0755
-
-- name: Run rustup-init.sh
-  shell: /root/rustup-init.sh -y -q

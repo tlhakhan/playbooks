@@ -1,0 +1,9 @@
+---
+- name: Import general.yml tasks
+  import_tasks: general.yml
+  
+- name: Import security.yml tasks
+  import_tasks: security.yml
+
+- name: Import jfrog-cli tasks
+  import_tasks: jfrog-cli.yml

@@ -9,6 +9,9 @@
     - name: Include vars.yml file
       include_vars: vars.yml
 
-    - name: Run ubuntu.yml playbook
-      include_tasks: ubuntu/main.yml
+    - name: Run Linux playbooks
+      include_tasks: os/linux/main.yml
+
+    - name: Run Ubuntu specific playbooks
+      include_tasks: os/ubuntu/main.yml
       when: ansible_facts["distribution"] == "Ubuntu"

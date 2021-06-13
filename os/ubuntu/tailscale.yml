@@ -1,0 +1,13 @@
+---
+#
+# Install tailscale repo
+# Reference: https://pkgs.tailscale.com/stable/
+#
+- name: Get tailscale repo
+  get_url:
+    url: https://pkgs.tailscale.com/stable/ubuntu/focal.list
+    dest: /etc/apt/sources.list.d/tailscale.list
+
+- name: Add tailscale focal gpg key
+  shell: curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.gpg | sudo apt-key add -
+  changed_when: false

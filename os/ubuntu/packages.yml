@@ -1,0 +1,25 @@
+---
+- name: Install packages
+  package:
+    name: '{{ item }}'
+    state: present
+  loop:
+    - sysstat # system stats
+    - zfsutils-linux # zfs for linux
+    - nvme-cli # nvme tools
+    - tree # directory ascii layout
+    - figlet # ascii art fonts
+    - mosh # always on shell
+    - jq # json pretty format
+    - zip # zip files
+    - hwloc-nox # view hardware topology, no X
+    - smartmontools # access disk reliability stats
+    - apt-file # search for files in packages
+    - golang-1.16 # for golang coding
+    - rustc # for rust coding
+
+- name: Add symlink for go-1.16 binary to /usr/bin/go
+  file:
+    src: /usr/lib/go-1.16/bin/go
+    dest: /usr/bin/go
+    state: link

@@ -28,12 +28,3 @@
     state: present
     key: '{{ item }}'
   loop: '{{ authorized_keys }}'
-
-- name: Add local CA certs
-  copy:
-    dest: /usr/local/share/ca-certificates/home-ca.crt
-    content: '{{ home_ca_cert }}'
-
-- name: Update CA certs
-  command: update-ca-certificates
-

@@ -10,7 +10,7 @@
     - docker.io
     - docker-compose
 
-- name: Make /data folder
+- name: Make /data folder to store docker data
   file:
     path: /data
     state: directory
@@ -25,9 +25,8 @@
 
 - name: Send over daemon.json
   copy:
-    src: daemon.json
+    src: files/docker_daemon.json
     dest: /etc/docker/daemon.json
-  notify: restart docker
 
 #
 # Docker repo certs
@@ -37,14 +36,22 @@
     path: /etc/docker/certs.d
     state: directory
 
-- name: Make repo.home.local folder
+- name: Make repo.tenzin.io folder
   file:
-    path: /etc/docker/certs.d/repo.home.local
+    path: /etc/docker/certs.d/repo.tenzin.io
     state: directory
 
-- name: Send home CA cert
+- name: Copy home CA cert to docker certs folder
   copy:
-    content: '{{ home_ca_cert }}'
-    dest: /etc/docker/certs.d/repo.home.local/home-ca.crt
+    src: files/home-ca.crt
+    dest: /etc/docker/certs.d/repo.tenzin.io/home-ca.crt
 
-- meta: flush_handlers
+#
+# Restart docker service
+#
+- name: Retart docker service
+  service:
+    name: docker
+    state: restarted
+  
+...
