@@ -1,5 +1,4 @@
-packages:
-  - ansible # config automation
+apt_packages:
   - sysstat # system stats
   - rsync # transfer files
   - git # source code manager

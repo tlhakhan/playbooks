@@ -1,0 +1,3 @@
+---
+- name: Include tasks
+  include_tasks: '{{ subtasks }}'

@@ -1,8 +1,0 @@
----
-- name: apply sysctl params
-  command: sysctl --system
-
-- name: restart containerd
-  service:
-    name: containerd
-    state: restarted

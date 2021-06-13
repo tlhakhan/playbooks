@@ -1,9 +1,0 @@
----
-- name: Import tasks
-  include_tasks: '{{ subtasks }}'
-  loop:
-    - security.yml
-    - ca_cert.yml
-    - app.yml
-  loop_control:
-    loop_var: subtasks

@@ -1,4 +1,0 @@
----
-install_kubectl: yes
-install_kubeadm: no
-install_kubelet: no

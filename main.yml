@@ -1,11 +1,11 @@
 #!/usr/bin/ansible-playbook
 ---
-- name: Configure ubuntu machine
-  hosts: my_ubuntu
+- name: Configure machine
+  hosts: localhost
   become: yes
-  gather_facts: no
+  gather_facts: yes
   roles:
-    - ubuntu
+    - general
     - docker
     - jfrog-cli
     - golang
