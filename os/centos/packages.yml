@@ -4,15 +4,10 @@
     name: '{{ item }}'
     state: present
   loop:
-    - epel-release # epel repos
     - sysstat # system stats
-    - nvme-cli # nvme tools
-    - tree # directory ascii layout
     - mosh # always on shell
     - jq # json pretty format
-    - zip # zip files
     - hwloc # view hardware topology, no X
-    - smartmontools # access disk reliability stats
     - golang # for golang coding
     - rust # for rust coding
 
