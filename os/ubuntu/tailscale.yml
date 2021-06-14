@@ -13,7 +13,17 @@
     url: https://pkgs.tailscale.com/stable/ubuntu/focal.gpg
     state: present
 
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
 - name: Install tailscale
   package:
     name: tailscale
     state: present
+
+- name: Enable and start tailscale service
+  service:
+    name: tailscaled
+    state: started
+    enabled: yes
