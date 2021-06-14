@@ -11,3 +11,8 @@
 - name: Add tailscale focal gpg key
   shell: curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.gpg | sudo apt-key add -
   changed_when: false
+
+- name: Install tailscale
+  package:
+    name: tailscale
+    state: present
