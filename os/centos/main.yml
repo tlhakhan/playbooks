@@ -10,3 +10,6 @@
 
 - name: Import tailscale.yml tasks
   import_tasks: tailscale.yml
+
+- name: Import services.yml tasks
+  import_tasks: services.yml

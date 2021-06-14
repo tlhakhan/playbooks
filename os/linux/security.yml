@@ -1,8 +1,11 @@
 ---
-
 - name: Generate random password
   set_fact: 
     random_password: "{{ lookup('password', '/dev/null')}}"
+  no_log: yes
+
+- name: Random password output
+  shell: 'echo {{ random_password }} > {{ playbook_dir }}/.generated_password'
   no_log: yes
 
 - name: Update password for root user
