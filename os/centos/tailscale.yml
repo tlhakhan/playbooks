@@ -12,3 +12,8 @@
   rpm_key:
     state: present
     key: https://pkgs.tailscale.com/stable/centos/8/repo.gpg
+
+- name: Install tailscale
+  package:
+    name: tailscale
+    state: present
