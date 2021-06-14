@@ -5,8 +5,6 @@
     state: present
   loop:
     - sysstat # system stats
-    - zfsutils-linux # zfs for linux
-    - nvme-cli # nvme tools
     - tree # directory ascii layout
     - figlet # ascii art fonts
     - mosh # always on shell
