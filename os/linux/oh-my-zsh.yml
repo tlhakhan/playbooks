@@ -1,0 +1,28 @@
+---
+- name: Get oh-my-zsh install script
+  get_url:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: ~/install-oh-my-zsh.sh
+    mode: 0755
+
+- name: Run oh-my-zsh install script
+  command: ~/install-oh-my-zsh.sh
+  args:
+    creates: ~/.oh-my-zsh
+
+- name: Send over zsh_aliases
+  copy:
+    src: files/zsh_aliases
+    dest: ~/.zsh_aliases
+
+- name: Update theme to bira
+  lineinfile:
+    path: ~/.zshrc
+    regexp: '^ZSH_THEME='
+    line: 'ZSH_THEME="bira"'
+
+- name: Source zsh_aliases
+  lineinfile:
+    path: ~/.zshrc
+    regexp: '\. ~\/\.zsh_aliases'
+    line: '. ~/.zsh_aliases'

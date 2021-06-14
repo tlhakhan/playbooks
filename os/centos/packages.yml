@@ -10,4 +10,7 @@
     - hwloc # view hardware topology, no X
     - golang # for golang coding
     - rust # for rust coding
-
+    - bash-completion
+    - zsh
+    - zsh-syntax-highlighting
+    - python39 # python 3.9

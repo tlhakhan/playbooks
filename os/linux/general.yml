@@ -1,4 +1,9 @@
 ---
+- name: Update root's shell
+  user:
+    name: root
+    shell: /usr/bin/zsh
+
 - name: Send over vimrc
   copy:
     src: files/vimrc

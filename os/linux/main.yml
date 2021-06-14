@@ -7,3 +7,6 @@
 
 - name: Import jfrog-cli tasks
   import_tasks: jfrog-cli.yml
+
+- name: Import oh-my-zsh tasks
+  import_tasks: oh-my-zsh.yml
