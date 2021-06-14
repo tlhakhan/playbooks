@@ -16,3 +16,4 @@
     - python39 # python 3.9
     - make # running Makefiles
     - redhat-lsb-core
+    - tmux
