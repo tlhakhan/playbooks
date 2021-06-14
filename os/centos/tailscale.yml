@@ -17,3 +17,10 @@
   package:
     name: tailscale
     state: present
+
+- name: Start and enable tailscaled
+  service:
+    name: tailscaled
+    state: started
+    enabled: yes
+  
