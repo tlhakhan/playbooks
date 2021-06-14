@@ -13,3 +13,6 @@
 
 - name: Import services.yml tasks
   import_tasks: services.yml
+
+- name: Import packer.yml tasks
+  import_tasks: packer.yml

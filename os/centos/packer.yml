@@ -1,0 +1,10 @@
+---
+- name: Add hashicorp packer repo
+  get_url:
+    url: https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+    dest: /etc/yum.repos.d/hashicorp.repo
+
+- name: Install packer
+  package:
+    name: packer
+    state: present  
