@@ -15,6 +15,11 @@
   args:
     creates: ~/.oh-my-zsh
 
+- name: Remove the install script
+  file:
+    path: ~/install-oh-my-zsh.sh
+    state: absent
+
 - name: Send over zsh_aliases
   copy:
     src: files/zsh_aliases
