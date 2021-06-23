@@ -1,12 +1,17 @@
 ---
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install ubuntu-dbgsym-keyring
+  package:
+    name: ubuntu-dbgsym-keyring
+    state: present
+
 - name: Setup debug packages
   copy:
     src: files/ddebs.list
     dest: /etc/apt/sources.list.d/ddebs.list
-
-- name: Update apt cache
-  apt:
-    update_cache: yes
 
 - name: Install packages
   package:
@@ -25,9 +30,8 @@
     - golang-1.16 # for golang coding
     - rustc # for rust coding
     - crash # for crash utility
-    - ubuntu-dbgsym-keyring # debug repo keyring
 
-- name: Install debug packages
+- name: Install kernel dbgsym debug package
   package:
     name: "linux-image-{{ ansible_facts['kernel'] }}-dbgsym"
     state: present
