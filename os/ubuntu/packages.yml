@@ -1,5 +1,5 @@
 ---
-- name: Update apt cache
+- name: Update apt cache 
   apt:
     update_cache: yes
 
@@ -12,6 +12,10 @@
   copy:
     src: files/ddebs.list
     dest: /etc/apt/sources.list.d/ddebs.list
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
 
 - name: Install packages
   package:
