@@ -36,6 +36,8 @@
     - crash # for crash utility
     - wireguard # for wireguard wg
     - wireguard-tools-dbgsym # wireguard dbgsym
+    - bpftrace # for bpftrace
+    - bpftrace-dbgsym # for bpftrace debug
 
 - name: Add symlink for go-1.16 binary to /usr/bin/go
   file:
