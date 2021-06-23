@@ -35,13 +35,14 @@
     - rustc # for rust coding
     - crash # for crash utility
 
-- name: Install kernel dbgsym debug package
-  package:
-    name: "linux-image-{{ ansible_facts['kernel'] }}-dbgsym"
-    state: present
-
 - name: Add symlink for go-1.16 binary to /usr/bin/go
   file:
     src: /usr/lib/go-1.16/bin/go
     dest: /usr/bin/go
     state: link
+
+- name: Install kernel dbgsym debug package
+  package:
+    name: "linux-image-{{ ansible_facts['kernel'] }}-dbgsym"
+    state: present
+
