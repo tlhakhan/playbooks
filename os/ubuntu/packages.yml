@@ -34,6 +34,8 @@
     - golang-1.16 # for golang coding
     - rustc # for rust coding
     - crash # for crash utility
+    - wireguard # for wireguard wg
+    - wireguard-tools-dbgsym # wireguard dbgsym
 
 - name: Add symlink for go-1.16 binary to /usr/bin/go
   file:
