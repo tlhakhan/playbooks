@@ -1,9 +1,0 @@
----
-#
-# jfrog-cli
-#
-- name: Get jfrog-cli
-  get_url:
-    url: "https://api.bintray.com/content/jfrog/jfrog-cli-go/$latest/jfrog-cli-linux-amd64/jfrog?bt_package=jfrog-cli-linux-amd64"
-    dest: /usr/sbin/jfrog
-    mode: 755

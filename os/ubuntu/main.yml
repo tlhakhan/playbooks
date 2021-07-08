@@ -10,3 +10,6 @@
 
 - name: Import tailscale.yml tasks
   import_tasks: tailscale.yml
+
+- name: Import jfrog-cli.yml tasks
+  import_tasks: jfrog-cli.yml

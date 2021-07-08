@@ -1,0 +1,21 @@
+---
+#
+# jfrog-cli
+#
+- name: Get JFrog key
+  apt_key:
+    url: https://releases.jfrog.io/artifactory/api/gpg/key/public
+
+- name: Get JFrog sources
+  copy:
+    dest: /etc/apt/sources.list.d/jfrog.list
+    content: deb https://releases.jfrog.io/artifactory/jfrog-debs xenial contrib
+
+- name: Update cahce  
+  apt:
+    update_cache: yes
+
+- name: Get jfrog-cli
+  package:
+    name: jfrog-cli-v2
+    state: present
